@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 public interface Sleeper {
 
 	public static final Sleeper SYSTEM_SLEEPER = new Sleeper() {
-		@Override
+		
 		public void sleep(Duration duration) {
 			try {
 				Thread.sleep(duration.in(TimeUnit.MILLISECONDS));
@@ -14,7 +14,7 @@ public interface Sleeper {
 			}
 		}
 
-		@Override
+	
 		public void sleep(long milliseconds) {
 			try {
 				Thread.sleep(milliseconds);

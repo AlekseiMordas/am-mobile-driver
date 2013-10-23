@@ -10,7 +10,7 @@ public class ExpectedConditions {
 
 	public static ExpectedCondition<Boolean> isVisible(final Element element) {
 		return new ExpectedCondition<Boolean>() {
-			@Override
+			
 			public Boolean apply(NativeDriver driver) {
 				String el = element.getLocator();
 				log.info("Is '" + el + "' element visible");
@@ -27,7 +27,7 @@ public class ExpectedConditions {
 
 	public static ExpectedCondition<Boolean> isNotVisible(final Element element) {
 		return new ExpectedCondition<Boolean>() {
-			@Override
+			
 			public Boolean apply(NativeDriver driver) {
 				String el = element.getLocator();
 				log.info("Is '" + el + "' element not visible");

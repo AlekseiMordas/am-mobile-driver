@@ -53,7 +53,7 @@ public class AppiumDriver implements NativeDriver {
 		return command.<String>execute();
 	}
 
-	@Override
+
 	public void waitForElement(final String locator, long timeOutInSeconds) {
 		LOGGER.info("Waiting for element '" + locator + "' exists during "
 				+ timeOutInSeconds + "sec timeout ...");
@@ -74,51 +74,51 @@ public class AppiumDriver implements NativeDriver {
 		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
 	}
 
-	@Override
+
 	public void touch(String locator) {
 		LOGGER.info("Touching element '" + locator + "' ...");
 		driver.findElement(By.xpath(locator)).click();
 		LOGGER.info("Element '" + locator + "' touched Successfully");
 	}
 
-	@Override
+ 
 	public void type(String locator, String text) {
 		driver.findElement(By.xpath(locator)).sendKeys(text);
 		LOGGER.info("Type text '" + text + "' ...");
 
 	}
 
-	@Override
+ 
 	public void type(int index, String text) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public void clear(String locator) {
 		driver.findElement(By.xpath(locator)).clear();
 		LOGGER.info("Clear field '" + locator + "' ...");
 
 	}
 
-	@Override
+ 
 	public void clear(int index) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public void takeScreenshot(String screenshotName) {
 		AppiumUtils.makeScreenshot(driver, screenshotName);
 	}
 
-	@Override
+ 
 	public void click(String locator) {
 		driver.findElement(By.xpath(locator)).click();
 		LOGGER.info("Element '" + locator + "' clicked");
 	}
 
-	@Override
+ 
 	public void setLandscapeOrientation() {
 		LOGGER.info("Setting Landscape orientation");
 		SetOrientationCommand command = new SetOrientationCommand(
@@ -126,7 +126,7 @@ public class AppiumDriver implements NativeDriver {
 		command.<Boolean>execute();
 	}
 
-	@Override
+ 
 	public void setPortraitOrientation() {
 		LOGGER.info("Setting Portrait orientation");
 		SetOrientationCommand command = new SetOrientationCommand(
@@ -134,44 +134,44 @@ public class AppiumDriver implements NativeDriver {
 		command.<Boolean>execute();
 	}
 
-	@Override
+ 
 	public boolean scrollDown() {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean scrollToTop() {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean isVisible(String locator, String drawableId) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean waitForText(String text, long timeout) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean scrollUp() {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean waitForText(String text, int minNumberOfMatches,
 			long timeOut, boolean doScroll, boolean onlyVisible) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean isElementExists(String foundBy) {
 		try {
 			driver.findElement(By.xpath(foundBy));
@@ -181,33 +181,33 @@ public class AppiumDriver implements NativeDriver {
 		}
 	}
 
-	@Override
+ 
 	public String getViewText(String foundBy) {
 		return driver.findElement(By.xpath(foundBy)).getText();
 	}
 
-	@Override
+ 
 	public void clickLong(String foundBy) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 
 	}
 
-	@Override
+ 
 	public void clickLong(float x, float y) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 
 	}
 
-	@Override
+ 
 	public void dragTo(float fromX, float fromY, float toX, float toY, int steps) {
 		// TODO Auto-generated method stub
 		throw new RuntimeException("Need implementation");
 
 	}
 
-	@Override
+ 
 	public Rectangle getElementLocation(String foundBy) {
 		int x = driver.findElement(By.xpath(foundBy)).getLocation().x;
 		int y = driver.findElement(By.xpath(foundBy)).getLocation().y;
@@ -215,24 +215,24 @@ public class AppiumDriver implements NativeDriver {
 		return new Rectangle(point);
 	}
 
-	@Override
+ 
 	public boolean isVisible(String foundBy) {
 		// TODO Auto-generated method stub
 		return driver.findElement(By.xpath(foundBy)).isDisplayed();
 	}
 
-	@Override
+ 
 	public void waitForTextNotVisible(String text, int timeout) {
 		throw new RuntimeException("Need implementation");
 
 	}
 
-	@Override
+ 
 	public Dimension getScreenSize() {
 		throw new RuntimeException("Need implementation");
 	}
 
-	@Override
+ 
 	public boolean isChildExists(String foundBy, String childId) {
 		// TODO Auto-generated method stub
 		return false;
@@ -248,80 +248,80 @@ public class AppiumDriver implements NativeDriver {
 		return driver.findElement(By.xpath(locator)).getSize();
 	}
 
-	@Override
+ 
 	public boolean searchText(String text) {
 		// TODO Auto-generated method stub
 		return driver.findElement(By.name(text)).isDisplayed();
 	}
 
-	@Override
+ 
 	public String findLogMessage(String[] logCmd, String messageToFind,
 			int timeoutSeconds) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
+ 
 	public int getSeekBarProgressMax(String id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+ 
 	public void setProgress(String id, int progress) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public int getSeekBarProgress(String id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+ 
 	public int getThumbOffset(String id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+ 
 	public boolean searchButton(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+ 
 	public void swipeRight() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public void swipeLeft() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public boolean scrollToBottom() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+ 
 	public void flick(float fromX, float fromY, float toX, float toY) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public void touch(float x, float y) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+ 
 	public boolean waitForLogMessage(String[] logCmd, String messageToWait,
 			int timeoutSeconds) {
 		// TODO Auto-generated method stub

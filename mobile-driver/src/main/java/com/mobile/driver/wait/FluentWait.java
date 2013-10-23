@@ -86,7 +86,7 @@ public class FluentWait<T> implements Wait<T> {
 	 */
 	public void until(final Predicate<T> isTrue) {
 		until(new Function<T, Boolean>() {
-			@Override
+			
 			public Boolean apply(T input) {
 				return isTrue.apply(input);
 			}
@@ -113,7 +113,7 @@ public class FluentWait<T> implements Wait<T> {
 	 * @throws TimeoutException
 	 *             If the timeout expires.
 	 */
-	@Override
+
 	public <V> V until(Function<? super T, V> isTrue) {
 		long end = clock.laterBy(timeout.in(TimeUnit.MILLISECONDS));
 		Throwable lastException = null;
