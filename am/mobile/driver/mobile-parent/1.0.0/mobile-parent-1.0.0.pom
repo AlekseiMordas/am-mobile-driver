@@ -1,19 +1,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>am.mobile.driver</groupId>
-		<artifactId>mobile-parent</artifactId>
-		<version>1.0.0</version>
-	</parent>
+	<groupId>am.mobile.driver</groupId>
+	<artifactId>mobile-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0.0</version>
 
-	<artifactId>mobile-driver</artifactId>
-	<packaging>jar</packaging>
-
-<properties>
-    <!-- github server corresponds to entry in ~/.m2/settings.xml -->
-    <github.global.server>github</github.global.server>
-</properties>
+	<modules>
+		<module>mobile-driver</module>
+		<module>appium-driver</module>
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		 <github.global.server>github</github.global.server>
+	</properties>
 
 	<name>Mobile Driver Interface</name>
 	<url>http://maven.apache.org</url>
@@ -46,19 +47,10 @@
 </build>
 
 	<distributionManagement>
-    <repository>
-        <id>internal.repo</id>
-        <name>Temporary Staging Repository</name>
-        <url>file://${project.build.directory}/mvn-repo</url>
-    </repository>
-</distributionManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-	</dependencies>
+                <repository>
+                        <id>maven-repository</id>
+                        <url>file://${project.build.directory}/mvn-repo</url>
+                </repository>
+        </distributionManagement>
 	
 </project>
