@@ -5,12 +5,15 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -188,8 +191,14 @@ public class AppiumDriver implements NativeDriver {
 
  
 	public void clickLong(String foundBy) {
-		// TODO Auto-generated method stub
-		throw new RuntimeException("Need implementation");
+		WebElement element  = driver.findElement(By.xpath(foundBy));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		HashMap<String, Double> tapObject = new HashMap<String, Double>();
+		tapObject.put("x", (double) element.getLocation().getX()); 
+		tapObject.put("y", (double) element.getLocation().getY()); 
+		tapObject.put("duration", 1.0);
+		js.executeScript("mobile: tap", tapObject);
+		LOGGER.info("Long tap on element");
 
 	}
 
@@ -328,6 +337,10 @@ public class AppiumDriver implements NativeDriver {
 		return false;
 	}
 
+	public RemoteWebDriver getDriver() {
+		return driver;
+	}
+	
 	public void quit() {
 		LOGGER.info("Quit driver");
 		driver.quit();
