@@ -8,6 +8,10 @@ public class UIView extends IOSElement {
 	public void touch() {
 		driver.touch(foundBy);
 	}
+	
+	public void touchLong() {
+		driver.clickLong(foundBy);
+	}
 
 	public void type(String text) {
 		driver.type(foundBy, text);
@@ -23,6 +27,14 @@ public class UIView extends IOSElement {
 
 	public String getText() {
 		return driver.getViewText(foundBy);
+	}
+	
+	public String getAttribute(String attribute) {
+		return driver.getAttribute(foundBy, attribute);
+	}
+	
+	public void touchByName() {
+		driver.touchByName(foundBy);
 	}
 	
 	public Rectangle getLocation() {

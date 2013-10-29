@@ -84,6 +84,11 @@ public class AppiumDriver implements NativeDriver {
 		LOGGER.info("Element '" + locator + "' touched Successfully");
 	}
 
+	public void touchByName(String locator) {
+		LOGGER.info("Touching element '" + locator + "' ...");
+		driver.findElement(By.name(locator)).click();
+		LOGGER.info("Element '" + locator + "' touched Successfully");
+	}
  
 	public void type(String locator, String text) {
 		driver.findElement(By.xpath(locator)).sendKeys(text);
@@ -184,7 +189,10 @@ public class AppiumDriver implements NativeDriver {
 		}
 	}
 
- 
+	public String getAttribute(String foundBy,String name) {
+		return driver.findElement(By.xpath(foundBy)).getAttribute(name);
+	}
+	
 	public String getViewText(String foundBy) {
 		return driver.findElement(By.xpath(foundBy)).getText();
 	}
