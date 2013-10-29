@@ -73,6 +73,22 @@ public class AppiumDriver implements NativeDriver {
 				});
 	}
 
+	public void waitForElementByName(final String locator, long timeOutInSeconds) {
+		LOGGER.info("Waiting for element '" + locator + "' exists during "
+				+ timeOutInSeconds + "sec timeout ...");
+		new WebDriverWait(driver, timeOutInSeconds)
+				.until(new ExpectedCondition<Boolean>() {
+					public Boolean apply(WebDriver d) {
+						try {
+							return d.findElement(By.name(locator))
+									.isDisplayed();
+						} catch (NoSuchElementException e) {
+							return false;
+						}
+					}
+				});
+	}
+	
 	public void waitImplicitly(int seconds) {
 		driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
 	}
