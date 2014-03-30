@@ -3,7 +3,7 @@
 	<groupId>am.mobile.driver</groupId>
 	<artifactId>mobile-driver</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.10</version>
+	<version>1.0.11</version>
 <properties>
     <!-- github server corresponds to entry in ~/.m2/settings.xml -->
     <github.global.server>github</github.global.server>
