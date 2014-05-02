@@ -118,7 +118,7 @@ public class AppiumDriver implements NativeDriver {
 	public void touchWithCoordinates(double x, double y, String nameVariable) {
 		HashMap<String, Double> tapObject = new HashMap<String, Double>();
 		tapObject.put("x", x); // in pixels from left
-		tapObject.put("y", y + 5); // in pixels from top
+		tapObject.put("y", y); // in pixels from top
 		JavascriptExecutor js = driver;
 		js.executeScript("mobile: tap", tapObject);
 		LOGGER.info("Element '" + nameVariable +  "' touched successfully by coordinates");
@@ -381,5 +381,4 @@ public class AppiumDriver implements NativeDriver {
 		}
 
 	}
-
 }
