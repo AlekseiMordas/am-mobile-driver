@@ -42,7 +42,7 @@ public class AppiumDriver implements NativeDriver {
 	private static final Logger LOGGER = Logger.getLogger(AppiumDriver.class);
 
 	private DriverType type;
-	
+
 	public AppiumDriver(String url, DesiredCapabilities capabilities) {
 		try {
 			executor = Executor.getExecutor(new URL(url));
@@ -61,30 +61,23 @@ public class AppiumDriver implements NativeDriver {
 		return command.<String> execute();
 	}
 
-	public void waitForElement(final String locator, String nameVariable, long timeOutInSeconds) {
-		LOGGER.info("Waiting for element '" + nameVariable + "' exists during "
-				+ timeOutInSeconds + "sec timeout ...");
-		new WebDriverWait(driver, timeOutInSeconds)
-				.until(new ExpectedCondition<Boolean>() {
-					public Boolean apply(WebDriver d) {
-						try {
-							return d.findElement(By.xpath(locator))
-									.isDisplayed();
-						} catch (NoSuchElementException e) {
-							return false;
-						}
-					}
-				});
+	public static By getByObject(String locator) {
+		if (locator.startsWith("//") || locator.startsWith("/")) {
+			return By.xpath(locator);
+		} else {
+			return By.name(locator);
+		}
 	}
 
-	public void waitForElementByName(final String locator, String nameVariable, long timeOutInSeconds) {
+	public void waitForElement(final String locator, String nameVariable,
+			long timeOutInSeconds) {
 		LOGGER.info("Waiting for element '" + nameVariable + "' exists during "
 				+ timeOutInSeconds + "sec timeout ...");
 		new WebDriverWait(driver, timeOutInSeconds)
 				.until(new ExpectedCondition<Boolean>() {
 					public Boolean apply(WebDriver d) {
 						try {
-							return d.findElement(By.name(locator))
+							return d.findElement(getByObject(locator))
 									.isDisplayed();
 						} catch (NoSuchElementException e) {
 							return false;
@@ -99,18 +92,12 @@ public class AppiumDriver implements NativeDriver {
 
 	public void touch(String locator, String nameVariable) {
 		LOGGER.info("Touching element '" + nameVariable + "' ...");
-		driver.findElement(By.xpath(locator)).click();
-		LOGGER.info("Element '" + nameVariable + "' touched Successfully");
-	}
-
-	public void touchByName(String locator, String nameVariable) {
-		LOGGER.info("Touching element '" + nameVariable + "' ...");
-		driver.findElement(By.name(locator)).click();
+		driver.findElement(getByObject(locator)).click();
 		LOGGER.info("Element '" + nameVariable + "' touched Successfully");
 	}
 
 	public void type(String locator, String nameVariable, String text) {
-		driver.findElement(By.xpath(locator)).sendKeys(text);
+		driver.findElement(getByObject(locator)).sendKeys(text);
 		LOGGER.info("Type text '" + text + "' to '" + nameVariable + "'");
 
 	}
@@ -121,7 +108,8 @@ public class AppiumDriver implements NativeDriver {
 		tapObject.put("y", y); // in pixels from top
 		JavascriptExecutor js = driver;
 		js.executeScript("mobile: tap", tapObject);
-		LOGGER.info("Element '" + nameVariable +  "' touched successfully by coordinates");
+		LOGGER.info("Element '" + nameVariable
+				+ "' touched successfully by coordinates");
 	}
 
 	public void type(int index, String text) {
@@ -130,7 +118,7 @@ public class AppiumDriver implements NativeDriver {
 	}
 
 	public void clear(String locator, String nameVariable) {
-		driver.findElement(By.xpath(locator)).clear();
+		driver.findElement(getByObject(locator)).clear();
 		LOGGER.info("Clear field '" + nameVariable + "'");
 
 	}
@@ -145,7 +133,7 @@ public class AppiumDriver implements NativeDriver {
 	}
 
 	public void click(String locator, String nameVariable) {
-		driver.findElement(By.xpath(locator)).click();
+		driver.findElement(getByObject(locator)).click();
 		LOGGER.info("Element '" + nameVariable + "' clicked");
 	}
 
@@ -162,8 +150,6 @@ public class AppiumDriver implements NativeDriver {
 				driver.getSessionId(), Orientation.PORTRAIT, executor);
 		command.<Boolean> execute();
 	}
-
-	
 
 	public void swipe(double startX, double startY, double endX, double endY,
 			double duration) {
@@ -203,7 +189,7 @@ public class AppiumDriver implements NativeDriver {
 		js.executeScript("mobile: scroll", scrollObject);
 		LOGGER.info("Scroll down");
 	}
-	
+
 	public boolean waitForText(String text, int minNumberOfMatches,
 			long timeOut, boolean doScroll, boolean onlyVisible) {
 		// TODO Auto-generated method stub
@@ -212,7 +198,7 @@ public class AppiumDriver implements NativeDriver {
 
 	public boolean isElementExists(String foundBy) {
 		try {
-			driver.findElement(By.xpath(foundBy));
+			driver.findElement(getByObject(foundBy));
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -220,15 +206,15 @@ public class AppiumDriver implements NativeDriver {
 	}
 
 	public String getAttribute(String foundBy, String name) {
-		return driver.findElement(By.xpath(foundBy)).getAttribute(name);
+		return driver.findElement(getByObject(foundBy)).getAttribute(name);
 	}
 
 	public String getViewText(String foundBy) {
-		return driver.findElement(By.xpath(foundBy)).getText();
+		return driver.findElement(getByObject(foundBy)).getText();
 	}
 
 	public void clickLong(String foundBy, String nameVariable) {
-		WebElement element = driver.findElement(By.xpath(foundBy));
+		WebElement element = driver.findElement(getByObject(foundBy));
 		JavascriptExecutor js = driver;
 		HashMap<String, Double> tapObject = new HashMap<String, Double>();
 		tapObject.put("x", (double) element.getLocation().getX());
@@ -254,20 +240,15 @@ public class AppiumDriver implements NativeDriver {
 	public Rectangle getElementLocation(String foundBy) {
 		int x = 0;
 		int y = 0;
-		if (foundBy.contains("//")) {
-			x = driver.findElement(By.xpath(foundBy)).getLocation().x;
-			y = driver.findElement(By.xpath(foundBy)).getLocation().y;
-		} else {
-			x = driver.findElement(By.name(foundBy)).getLocation().x;
-			y = driver.findElement(By.name(foundBy)).getLocation().y;
-		}
+		x = driver.findElement(getByObject(foundBy)).getLocation().x;
+		y = driver.findElement(getByObject(foundBy)).getLocation().y;
 		Point point = new Point(x, y);
 		return new Rectangle(point);
 	}
 
 	public boolean isVisible(String foundBy) {
 		// TODO Auto-generated method stub
-		return driver.findElement(By.xpath(foundBy)).isDisplayed();
+		return driver.findElement(getByObject(foundBy)).isDisplayed();
 	}
 
 	public void waitForTextNotVisible(String text, int timeout) {
@@ -291,7 +272,7 @@ public class AppiumDriver implements NativeDriver {
 
 	public org.openqa.selenium.Dimension getSize(String locator) {
 		LOGGER.info("Get size of " + locator);
-		return driver.findElement(By.xpath(locator)).getSize();
+		return driver.findElement(getByObject(locator)).getSize();
 	}
 
 	public boolean searchText(String text) {
@@ -340,8 +321,6 @@ public class AppiumDriver implements NativeDriver {
 
 	}
 
-
-
 	public void flick(float fromX, float fromY, float toX, float toY) {
 		// TODO Auto-generated method stub
 
@@ -373,11 +352,11 @@ public class AppiumDriver implements NativeDriver {
 
 	public void setDriverType(String device) {
 		if (device.contains("ios7".toUpperCase())) {
-			type =  DriverType.IOS7;
+			type = DriverType.IOS7;
 		} else if (device.contains("android".toUpperCase())) {
-			type =  DriverType.ANDROID;
+			type = DriverType.ANDROID;
 		} else {
-			type =  DriverType.IOS;
+			type = DriverType.IOS;
 		}
 
 	}

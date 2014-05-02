@@ -34,10 +34,6 @@ public class UIView extends IOSElement {
 		return driver.getAttribute(foundBy, attribute);
 	}
 	
-	public void touchByName() {
-		driver.touchByName(foundBy, variableName);
-	}
-	
 	public void touchWithCoordinates(double x, double y) {
 		driver.touchWithCoordinates(x, y, variableName);
 	}

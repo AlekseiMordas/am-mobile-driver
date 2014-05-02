@@ -41,15 +41,6 @@ public class IOSElement extends Element {
 
 	}
 
-	public void waitForElementByName(long timeoutSeconds) {
-		try {
-			driver.waitForElementByName(foundBy,variableName, timeoutSeconds);
-		}
-		catch(NoSuchElementException e) {
-			throw new WaitForElementException("Failed to wait element " + e.getMessage());
-		}
-
-	}
 	
 	public void waitImplicitly(int seconds) {
 		driver.waitImplicitly(seconds);
