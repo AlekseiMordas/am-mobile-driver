@@ -12,21 +12,21 @@ import java.awt.Rectangle;
  */
 public interface NativeDriver {
 
-	void waitForElement(final String locator, long timeOutInSeconds);
+	void waitForElement(final String locator,final String nameVariable, long timeOutInSeconds);
 
 	void touch(String locator, String nameVariable);
 
-	void type(String locator, String text);
+	void type(String locator,final String nameVariable,String text);
 
 	void type(int index, String text);
 
-	void clear(String locator);
+	void clear(String locator,final String nameVariable);
 
 	void clear(int index);
 
 	void takeScreenshot(String screenshotName);
 
-	void click(String locator);
+	void click(String locator,final String nameVariable);
 
 	void setLandscapeOrientation();
 
@@ -46,7 +46,7 @@ public interface NativeDriver {
 
 	String getViewText(String foundBy);
 
-	void clickLong(String foundBy);
+	void clickLong(String foundBy,final String nameVariable);
 
 	void clickLong(float x, float y);
 

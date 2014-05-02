@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -60,8 +61,8 @@ public class AppiumDriver implements NativeDriver {
 		return command.<String> execute();
 	}
 
-	public void waitForElement(final String locator, long timeOutInSeconds) {
-		LOGGER.info("Waiting for element '" + locator + "' exists during "
+	public void waitForElement(final String locator, String nameVariable, long timeOutInSeconds) {
+		LOGGER.info("Waiting for element '" + nameVariable + "' exists during "
 				+ timeOutInSeconds + "sec timeout ...");
 		new WebDriverWait(driver, timeOutInSeconds)
 				.until(new ExpectedCondition<Boolean>() {
@@ -76,8 +77,8 @@ public class AppiumDriver implements NativeDriver {
 				});
 	}
 
-	public void waitForElementByName(final String locator, long timeOutInSeconds) {
-		LOGGER.info("Waiting for element '" + locator + "' exists during "
+	public void waitForElementByName(final String locator, String nameVariable, long timeOutInSeconds) {
+		LOGGER.info("Waiting for element '" + nameVariable + "' exists during "
 				+ timeOutInSeconds + "sec timeout ...");
 		new WebDriverWait(driver, timeOutInSeconds)
 				.until(new ExpectedCondition<Boolean>() {
@@ -102,25 +103,25 @@ public class AppiumDriver implements NativeDriver {
 		LOGGER.info("Element '" + nameVariable + "' touched Successfully");
 	}
 
-	public void touchByName(String locator) {
-		LOGGER.info("Touching element '" + locator + "' ...");
+	public void touchByName(String locator, String nameVariable) {
+		LOGGER.info("Touching element '" + nameVariable + "' ...");
 		driver.findElement(By.name(locator)).click();
-		LOGGER.info("Element '" + locator + "' touched Successfully");
+		LOGGER.info("Element '" + nameVariable + "' touched Successfully");
 	}
 
-	public void type(String locator, String text) {
+	public void type(String locator, String nameVariable, String text) {
 		driver.findElement(By.xpath(locator)).sendKeys(text);
-		LOGGER.info("Type text '" + text + "' ...");
+		LOGGER.info("Type text '" + text + "' to '" + nameVariable + "'");
 
 	}
 
-	public void touchWithCoordinates(double x, double y) {
+	public void touchWithCoordinates(double x, double y, String nameVariable) {
 		HashMap<String, Double> tapObject = new HashMap<String, Double>();
 		tapObject.put("x", x); // in pixels from left
 		tapObject.put("y", y + 5); // in pixels from top
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = driver;
 		js.executeScript("mobile: tap", tapObject);
-		LOGGER.info("Element touched Successfully");
+		LOGGER.info("Element '" + nameVariable +  "' touched successfully by coordinates");
 	}
 
 	public void type(int index, String text) {
@@ -128,9 +129,9 @@ public class AppiumDriver implements NativeDriver {
 
 	}
 
-	public void clear(String locator) {
+	public void clear(String locator, String nameVariable) {
 		driver.findElement(By.xpath(locator)).clear();
-		LOGGER.info("Clear field '" + locator + "' ...");
+		LOGGER.info("Clear field '" + nameVariable + "'");
 
 	}
 
@@ -143,9 +144,9 @@ public class AppiumDriver implements NativeDriver {
 		AppiumUtils.makeScreenshot(driver, screenshotName);
 	}
 
-	public void click(String locator) {
+	public void click(String locator, String nameVariable) {
 		driver.findElement(By.xpath(locator)).click();
-		LOGGER.info("Element '" + locator + "' clicked");
+		LOGGER.info("Element '" + nameVariable + "' clicked");
 	}
 
 	public void setLandscapeOrientation() {
@@ -166,7 +167,7 @@ public class AppiumDriver implements NativeDriver {
 
 	public void swipe(double startX, double startY, double endX, double endY,
 			double duration) {
-		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		JavascriptExecutor js = getDriver();
 		HashMap<String, Double> swipeObject = new HashMap<String, Double>();
 		swipeObject.put("startX", Double.valueOf(startX));
 		swipeObject.put("startY", Double.valueOf(startY));
@@ -188,7 +189,7 @@ public class AppiumDriver implements NativeDriver {
 	}
 
 	public void scrollTop() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = driver;
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("direction", "top");
 		js.executeScript("mobile: scroll", scrollObject);
@@ -196,7 +197,7 @@ public class AppiumDriver implements NativeDriver {
 	}
 
 	public void scrollDown() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = driver;
 		HashMap<String, String> scrollObject = new HashMap<String, String>();
 		scrollObject.put("direction", "down");
 		js.executeScript("mobile: scroll", scrollObject);
@@ -226,15 +227,15 @@ public class AppiumDriver implements NativeDriver {
 		return driver.findElement(By.xpath(foundBy)).getText();
 	}
 
-	public void clickLong(String foundBy) {
+	public void clickLong(String foundBy, String nameVariable) {
 		WebElement element = driver.findElement(By.xpath(foundBy));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = driver;
 		HashMap<String, Double> tapObject = new HashMap<String, Double>();
 		tapObject.put("x", (double) element.getLocation().getX());
 		tapObject.put("y", (double) element.getLocation().getY());
 		tapObject.put("duration", 1.0);
 		js.executeScript("mobile: tap", tapObject);
-		LOGGER.info("Long tap on element");
+		LOGGER.info("Long tap on '" + nameVariable + "'");
 
 	}
 

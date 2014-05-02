@@ -33,7 +33,7 @@ public class IOSElement extends Element {
 	@Override
 	public void waitForElement(long timeoutSeconds) {
 		try {
-			driver.waitForElement(foundBy, timeoutSeconds);
+			driver.waitForElement(foundBy,  variableName,timeoutSeconds);
 		}
 		catch(NoSuchElementException e) {
 			throw new WaitForElementException("Failed to wait element " + e.getMessage());
@@ -43,7 +43,7 @@ public class IOSElement extends Element {
 
 	public void waitForElementByName(long timeoutSeconds) {
 		try {
-			driver.waitForElementByName(foundBy, timeoutSeconds);
+			driver.waitForElementByName(foundBy,variableName, timeoutSeconds);
 		}
 		catch(NoSuchElementException e) {
 			throw new WaitForElementException("Failed to wait element " + e.getMessage());

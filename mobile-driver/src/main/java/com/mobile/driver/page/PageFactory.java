@@ -7,7 +7,6 @@ import com.annotation.FindBy;
 import com.mobile.driver.element.Element;
 import com.mobile.driver.nativedriver.DriverType;
 import com.mobile.driver.nativedriver.NativeDriver;
-import com.mobile.driver.utils.NameVariableUtil;
 
 /**
  * 
@@ -45,7 +44,7 @@ public class PageFactory {
 	private static <T extends Page> void initElements(NativeDriver driver,
 			T page) {
 		for (Field field : page.getClass().getDeclaredFields()) {
-
+			field.setAccessible(true);
 			try {
 
 				Class<?> fieldClass = field.getType();
@@ -85,12 +84,10 @@ public class PageFactory {
 							}
 
 						}
-						element.setVariableName(NameVariableUtil
-								.getNameVariable(page.getClass(),
-										element.getLocator()));
+						element.setVariableName(field.getName());
 					}
 					
-					field.setAccessible(true);
+					
 					field.set(page, element);
 
 				}

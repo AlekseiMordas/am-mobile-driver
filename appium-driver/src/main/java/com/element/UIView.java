@@ -1,6 +1,7 @@
 package com.element;
 
 import java.awt.Rectangle;
+
 import org.openqa.selenium.Dimension;
 
 public class UIView extends IOSElement {
@@ -10,11 +11,11 @@ public class UIView extends IOSElement {
 	}
 	
 	public void touchLong() {
-		driver.clickLong(foundBy);
+		driver.clickLong(foundBy, variableName);
 	}
 
 	public void type(String text) {
-		driver.type(foundBy, text);
+		driver.type(foundBy, variableName, text);
 	}
 
 	public Dimension getSize() {
@@ -22,7 +23,7 @@ public class UIView extends IOSElement {
 	}
 
 	public void clear() {
-		driver.clear(foundBy);
+		driver.clear(foundBy, variableName);
 	}
 
 	public String getText() {
@@ -34,11 +35,11 @@ public class UIView extends IOSElement {
 	}
 	
 	public void touchByName() {
-		driver.touchByName(foundBy);
+		driver.touchByName(foundBy, variableName);
 	}
 	
 	public void touchWithCoordinates(double x, double y) {
-		driver.touchWithCoordinates(x, y);
+		driver.touchWithCoordinates(x, y, variableName);
 	}
 	
 	public Rectangle getLocation() {
