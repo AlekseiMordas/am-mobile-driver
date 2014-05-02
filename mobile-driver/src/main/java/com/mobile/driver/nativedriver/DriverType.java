@@ -2,11 +2,11 @@ package com.mobile.driver.nativedriver;
 
 /**
  * 
- * @author Maryia_Sakalouskaya
+ * @author Aleksei_Mordas
  * 
  *         Enum which represent Driver Type: iOS or Android
  */
 public enum DriverType {
 
-	IOS, ANDROID;
+	IOS, ANDROID, IOS7;
 }

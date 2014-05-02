@@ -6,7 +6,7 @@ import org.openqa.selenium.Dimension;
 public class UIView extends IOSElement {
 
 	public void touch() {
-		driver.touch(foundBy);
+		driver.touch(foundBy, variableName);
 	}
 	
 	public void touchLong() {
@@ -35,6 +35,10 @@ public class UIView extends IOSElement {
 	
 	public void touchByName() {
 		driver.touchByName(foundBy);
+	}
+	
+	public void touchWithCoordinates(double x, double y) {
+		driver.touchWithCoordinates(x, y);
 	}
 	
 	public Rectangle getLocation() {

@@ -3,7 +3,7 @@
 	<groupId>am.appium.driver</groupId>
 	<artifactId>appium-driver</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.4</version>
+	<version>1.0.13</version>
 	
 	<repositories>
                 <repository>

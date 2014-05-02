@@ -14,7 +14,7 @@ public interface NativeDriver {
 
 	void waitForElement(final String locator, long timeOutInSeconds);
 
-	void touch(String locator);
+	void touch(String locator, String nameVariable);
 
 	void type(String locator, String text);
 
@@ -32,15 +32,13 @@ public interface NativeDriver {
 
 	void setPortraitOrientation();
 
-	boolean scrollDown();
+	void scrollDown();
 
-	boolean scrollToTop();
+	void scrollTop();
 
 	boolean isVisible(String locator, String drawableId);
 
 	boolean waitForText(String text, long timeout);
-
-	boolean scrollUp();
 
 	boolean waitForText(String text, int minNumberOfMatches, long timeOut, boolean doScroll, boolean onlyVisible);
 
@@ -82,11 +80,13 @@ public interface NativeDriver {
 
 	void swipeLeft();
 
-	boolean scrollToBottom();
-
 	void flick(float fromX, float fromY, float toX, float toY);
 
 	void touch(float x, float y);
 
 	boolean waitForLogMessage(String[] logCmd, final String messageToWait, int timeoutSeconds);
+	
+	DriverType getDriverType();
+	
+	void setDriverType(String device);
 }

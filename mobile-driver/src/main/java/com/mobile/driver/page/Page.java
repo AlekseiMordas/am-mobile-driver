@@ -2,7 +2,7 @@ package com.mobile.driver.page;
 
 /**
  * 
- * @author Maryia_Sakalouskaya
+ * @author Aleksei_Mordas
  * 
  *         Abstract representation of Mobile UI Page
  * 

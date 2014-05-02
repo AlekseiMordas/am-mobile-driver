@@ -4,13 +4,17 @@ import com.mobile.driver.nativedriver.NativeDriver;
 
 /**
  * 
- * @author Maryia_Sakalouskaya
+ * @author Aleksei_Mordas
  * 
  *         Abstract representation of mobile UI elements
  */
 public abstract class Element {
 
 	public abstract void setFoundBy(String foundBy);
+	
+	public abstract void setVariableName(String name);
+	
+	public abstract String getVariableName();
 
 	public abstract void setFoundBy(int index);
 

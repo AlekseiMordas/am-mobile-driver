@@ -13,6 +13,8 @@ public class IOSElement extends Element {
 	protected AppiumDriver driver;
 
 	protected String foundBy;
+	
+	protected String variableName;
 
 	@Override
 	public boolean isExists() {
@@ -71,6 +73,18 @@ public class IOSElement extends Element {
 	public String getLocator() {
 
 		return getFoundBy();
+	}
+
+	@Override
+	public void setVariableName(String variableName) {
+		this.variableName = variableName;
+		
+	}
+
+	@Override
+	public String getVariableName() {
+		return variableName;
+		
 	}
 
 }
