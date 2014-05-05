@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -18,9 +24,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.HttpCommandExecutor;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.google.gson.JsonParser;
 import com.mobile.driver.nativedriver.DriverType;
 import com.mobile.driver.nativedriver.NativeDriver;
 import com.orientation.Executor;
@@ -38,12 +46,18 @@ public class AppiumDriver implements NativeDriver {
 	private RemoteWebDriver driver;
 
 	private HttpCommandExecutor executor = null;
+	
+	private static String APPIUM_URL=null; 
 
 	private static final Logger LOGGER = Logger.getLogger(AppiumDriver.class);
 
 	private DriverType type;
 
+	private static final HttpClient client = HttpClients.createDefault();
+	private static final JsonParser parser = new JsonParser();
+
 	public AppiumDriver(String url, DesiredCapabilities capabilities) {
+		APPIUM_URL = url;
 		try {
 			executor = Executor.getExecutor(new URL(url));
 			driver = new RemoteWebDriver(executor, capabilities);
@@ -224,6 +238,16 @@ public class AppiumDriver implements NativeDriver {
 		LOGGER.info("Long tap on '" + nameVariable + "'");
 
 	}
+
+	public void scrollToText(String text) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(By.name(text));
+		HashMap<String, String> scrollToObject = new HashMap<String, String>();
+		scrollToObject.put("element",((RemoteWebElement) element).getId());
+		js.executeScript("mobile: scrollTo", scrollToObject);
+		LOGGER.info("Scrolled to '" + element.getText() + "'");
+	}
+
 
 	public void clickLong(float x, float y) {
 		// TODO Auto-generated method stub

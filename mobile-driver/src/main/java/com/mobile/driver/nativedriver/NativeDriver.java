@@ -33,6 +33,8 @@ public interface NativeDriver {
 	void setPortraitOrientation();
 
 	void scrollDown();
+	
+	void scrollToText(String text);
 
 	void scrollTop();
 
