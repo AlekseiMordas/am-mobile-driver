@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -20,7 +21,7 @@ public class AppiumUtils {
 
 	private static final Logger LOGGER = Logger.getLogger(AppiumUtils.class);
 
-	private static final String DATE_FORMAT = "dd_MMM_yyyy__hh_mm_ssaa_SSS";
+	private static final String DATE_FORMAT = "dd_MM_yyyy__hh_mm_ssaa_SSS";
 
 	private static String fileSeparator = System.getProperty("file.separator");
 
@@ -29,7 +30,7 @@ public class AppiumUtils {
 		try {
 			WebDriver augmentedDriver = new Augmenter().augment(driver);
 			Date date = new Date();
-			DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+			DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
 
 			File directory = new File("");
 			directory = new File(directory.getAbsolutePath() + fileSeparator
